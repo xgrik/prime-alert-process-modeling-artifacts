@@ -1,0 +1,85 @@
+landscape:
+  summary:
+    - Establishes a synchronized multi-domain theater healthcare architecture that balancing central command monitoring with forward point-of-injury execution.
+    - Organizes operational trajectories for physical casualty stabilization, regulated transit validation, and secondary institutional clinical intake.
+    - Integrates continuous medical resource lifecycle support, joint planning alignments, and external environmental protection safeguards into functional theater loops.
+  domains:
+    - id: D1
+      name: Joint Command, Control & Operational Planning
+      purpose: Centralizing operational medical tracking, joint battle rhythm synchronization, regional threat mapping, and campaign health design.
+      related_findings: [E3, E4, E10, E11, E20]
+      main_actors: [Joint Task Force Surgeon, Joint Medical Operations Center Staff, JTF Medical Intelligence Officer, Service Component Surgeons, J-5 Planning Group]
+      dependencies:
+        - target_domain: D4
+          relationship: information flow
+          related_findings: [E4]
+      evidence_status: Explicit
+    - id: D2
+      name: Tactical Frontline & Emergency Care
+      purpose: Executing immediate trauma stabilization, field triage adjustments, forward damage control surgery, and perimeter toxic decontamination.
+      related_findings: [E7, E8, E13, E14]
+      main_actors: [Combat Medics, First Responders, Forward Resuscitative Surgical Teams, MTF Decontamination Teams]
+      dependencies:
+        - target_domain: D4
+          relationship: patient movement
+          related_findings: [E1, E13]
+        - target_domain: D1
+          relationship: escalation
+          related_findings: [E7, E14]
+      evidence_status: Explicit
+    - id: D3
+      name: Theater Hospitalization & Intake Management
+      purpose: Administering advanced secondary clinical interventions, stabilizing bed occupancy allocations, and managing regulated or unannounced incoming patient streams.
+      related_findings: [E15, E18]
+      main_actors: [Combat Support Hospitals, Air Force Theater Hospitals, MTF Commanders, Patient Administration Personnel, Facility Reception Teams]
+      dependencies:
+        - target_domain: D1
+          relationship: information flow
+          related_findings: [E4, E15]
+      evidence_status: Explicit
+    - id: D4
+      name: Tactical Medical Evacuation & Transit Coordination
+      purpose: Processing tactical field extraction alerts, validating formal patient movement requests, and synchronizing multi-component logistics lift capabilities.
+      related_findings: [E1, E2, E16]
+      main_actors: [Unit First Responders, JPMRC/Component PMRC Staff, Regulating Flight Surgeons, Joint Movement Control Center Officers]
+      dependencies:
+        - target_domain: D3
+          relationship: patient movement
+          related_findings: [E2, E16]
+      evidence_status: Explicit
+    - id: D5
+      name: Health Service Logistics & Resource Cycles
+      purpose: Sustaining continuous operational clinical endurance through Class VIII supply channels, theater blood tracking, and transit lifecycle equipment loops.
+      related_findings: [E5, E6, E19]
+      main_actors: [Unit Medical Supply Officers, Theater Lead Agent for Medical Materiel, Blood Supply Units, AJBPO/JBPO Managers, Theater PMI Cell]
+      dependencies:
+        - target_domain: D2
+          relationship: handover
+          related_findings: [E19]
+        - target_domain: D3
+          relationship: handover
+          related_findings: [E5, E6]
+      evidence_status: Partial
+    - id: D6
+      name: Preventative Health & External Coordination
+      purpose: Recording regional disease outbreaks, monitoring force vector exposures, and coordinating civil-military or multinational health footprints.
+      related_findings: [E9, E12, E17]
+      main_actors: [Preventive Medicine Teams, JTF Epidemiologist, JTF Medical Liaison Officer, Civil-Military Operations Center Director, Coalition Medical Liaisons]
+      dependencies:
+        - target_domain: D1
+          relationship: information flow
+          related_findings: [E9, E11]
+      evidence_status: Partial
+  cross_cutting_elements:
+    - name: Multi-Component Liaison Networks
+      related_domains: [D1, D4, D6]
+      related_findings: [E10, E12, E16, E17]
+      note: Inter-Service, civil-military, and multinational liaison officers bridge structural gaps across disparate communication systems and localized command networks.
+    - name: Cohesive Patient Record Strings
+      related_domains: [D2, D3, D4]
+      related_findings: [E1, E2, E13, E18]
+      note: Requires field data consistency spanning hand-written field TCCC cards, tactical 9-line transmissions, and central automated TRAC2ES tracking registries.
+  ambiguities_and_boundary_notes:
+    - Accountability boundaries for tracking, sanitizing, and returning Patient Movement Items (PMIs) display multi-component friction and operational tracking gaps.
+    - Process frameworks governing unannounced, unregulated tactical casualty check-ins lack automated tracking integration before the physical perimeter gate screening.
+    - Shared resource governance models across multinational coalition forces operate on manual coordination interfaces rather than fully unified joint systems.

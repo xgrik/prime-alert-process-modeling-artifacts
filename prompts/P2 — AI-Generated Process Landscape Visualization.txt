@@ -1,0 +1,110 @@
+P2 — AI-Generated Process Landscape Visualization
+
+Role
+
+You are an analyst of military health operations and business process modeling.
+
+Using the preceding document exploration record, create a source-grounded high-level process landscape for military health operations described in Joint Publication 4-02: Health Service Support (2006).
+
+Input
+
+Use the preceding document exploration record from this conversation as the primary input for this task. Do not repeat or re-run the full document exploration.
+
+Consult Joint Publication 4-02 only when clarification of an ambiguous finding or source reference is necessary.
+
+Study Context
+
+The downstream case study concerns PRIME Alert, a future AI-assisted solution intended to support health and environmental monitoring, alerts, and coordination between responders or soldiers and a Command Unit in high-risk environments.
+
+At this stage, do not filter, rank, or select process domains according to PRIME Alert relevance. The purpose is to create a broad and operationally meaningful view of the military health domain.
+
+Evidence and Scope Rules
+
+- Treat the exploration findings from the previous output and Joint Publication 4-02 as the evidence base for the landscape.
+- Preserve the distinction between explicit and partial evidence from the previous findings.
+- Organize the landscape according to operational process logic, not according to the chapter structure of the document.
+- Do not invent process domains, relationships, actors, activities, or handovers not supported by the input findings.
+- Do not assume that the doctrine describes AI, wearable sensors, telemetry, dashboards, automated speech, or other technical components of PRIME Alert.
+- Do not assess PRIME Alert relevance, prioritize domains, extract process candidates, or recommend target processes.
+- Preserve traceability by referencing the relevant previous finding identifiers for every domain.
+- Clearly mark ambiguity or uncertainty instead of filling gaps with assumptions.
+
+Task
+
+Consolidate the findings from the previous output into a high-level military health process landscape.
+
+Create 5 to 8 process domains. Each domain should represent a meaningful operational area that groups related process findings. The domains should be broad enough to provide an understandable overview while still preserving meaningful differences between operational areas.
+
+Assign stable identifiers D1, D2, D3, and so on.
+
+Identify major relationships and dependencies between domains, such as information flow, patient movement, escalation, coordination, or handover relationships.
+
+Do not create detailed process candidates, BPMN models, BPMN XML, prioritization results, or implementation recommendations.
+
+Output Format
+
+Return only the following three outputs.
+
+1. Structured Landscape Record
+
+Create a concise YAML record for use in subsequent pipeline steps. This record is intended primarily as structured input for later LLM-assisted candidate extraction and prioritization.
+
+Use the following structure:
+
+landscape:
+  summary:
+    - concise summary point
+  domains:
+    - id: D1
+      name: concise domain name
+      purpose: concise purpose
+      related_findings: [E1, E2]
+      main_actors:
+        - actor or role
+      dependencies:
+        - target_domain: D2
+          relationship: coordination | handover | information flow | patient movement | escalation | shared dependency
+          related_findings: [E3]
+      evidence_status: Explicit | Partial
+  cross_cutting_elements:
+    - name: concise element name
+      related_domains: [D1, D2]
+      related_findings: [E1, E4]
+      note: concise source-grounded note
+  ambiguities_and_boundary_notes:
+    - concise note
+
+Create 5 to 8 domains only. Preserve all domain identifiers and related previous finding identifiers consistently for subsequent prompts.
+
+2. Mermaid Process Landscape
+
+Provide only the Mermaid source code for one high-level process landscape. Do not render, explain, or preview the diagram.
+
+Requirements:
+
+- Use flowchart TB.
+- Use 5 to 8 domain nodes only.
+- Represent each domain as a concise rectangular node containing its identifier and name, for example: D1: HSS Planning and Coordination.
+- Use a clear top-to-bottom layout that reflects the main operational logic of the landscape.
+- Include no more than 8 cross-domain arrows. Retain only the most important source-grounded relationships.
+- Label every arrow with a concise relationship description of no more than three words, for example: planning guidance, health-risk information, patient transfer, medical support, or casualty escalation.
+- Do not include unlabeled arrows.
+- Avoid reciprocal arrows, duplicate relationships, and weak dependencies. Where multiple relationships exist between the same two domains, show only the most important one.
+- Arrange supporting or cross-cutting domains to minimize line crossings and long curved arrows.
+- Use different restrained pastel fill colors for each domain node to improve visual distinction. Use dark borders and black text to preserve readability.
+- Define node styling using Mermaid classDef statements and assign a separate class to every domain node.
+- Do not use colors to communicate meaning without also stating that meaning in node labels or edge labels.
+- Avoid detailed activities, BPMN notation, technical system components, and long text labels.
+- Keep the diagram readable and suitable for use as a high-level landscape figure in an academic paper.
+- Use domain identifiers consistently with the structured landscape record.
+- Return Mermaid source code only. Do not render, explain, or preview the diagram.
+
+3. Short Interpretation Notes
+
+Provide no more than five concise bullet points explaining:
+
+- the overall operational logic of the landscape;
+- important cross-domain dependencies;
+- areas that require caution because of partial or ambiguous source evidence.
+
+Do not provide Markdown tables, BPMN elements, BPMN XML, implementation recommendations, process candidates, prioritization results, or target-process suggestions.

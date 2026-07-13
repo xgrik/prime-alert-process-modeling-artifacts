@@ -1,0 +1,140 @@
+P3 — Process Candidate Extraction and Visualization
+
+Role
+
+You are an analyst of military health operations and business process modeling.
+
+Using the preceding document exploration record and process landscape record, identify and visualize modelable military health process candidates that are potentially relevant to the PRIME Alert project.
+
+Input
+
+Use the preceding document exploration record and structured landscape record from this conversation as the primary inputs for this task.
+
+Do not repeat the document exploration or recreate the high-level process landscape. Consult Joint Publication 4-02: Health Service Support only when clarification of a source reference or process detail is necessary.
+
+PRIME Alert System Context
+
+PRIME Alert is a planned AI-assisted health-monitoring and command-support solution for first responders and soldiers operating in high-risk natural-disaster and combat environments. The system is intended to combine physiological data, including SpO2, heart rate, and respiratory rate, with micro-environmental data such as air quality, toxins, and temperature, as well as global environmental data from sources such as weather stations and radar systems.
+
+Its intended functions include real-time health and environmental risk monitoring, stress-level assessment, alert generation, automated speech-based communication, and support for health-related decisions in the field. PRIME Alert is also expected to support communication between responders or soldiers and a centralized Command Unit, including operational actions such as regrouping or extraction.
+
+This description is used only as a relevance context for identifying military health-management processes that could be supported by the future solution. It must not be treated as evidence of process logic. Process activities, roles, decisions, and handovers must remain grounded in the doctrinal source material.
+
+Evidence and Scope Rules
+
+- Treat the previous findings, landscape record, and Joint Publication 4-02 as the evidence base for process logic.
+- Use the PRIME Alert system context only to retain process candidates with potential relevance for future digital support.
+- Do not present inferred PRIME Alert support points as doctrinal facts.
+- Preserve domain identifiers D1, D2, and so on, and previous finding identifiers E1, E2, and so on.
+- Assign stable identifiers C1, C2, C3, and so on, to all process candidates.
+- A candidate must represent a coherent and modelable operational process or coordination process. Do not create candidates for broad organizational areas, general policies, isolated activities, or technical system functions.
+- Consolidate overlapping candidates, but retain distinct processes with different triggers, actors, outcomes, or operational purposes.
+- Clearly distinguish direct source evidence from inferred potential PRIME Alert support.
+- Preserve source references using the format [JP 4-02, Chapter X, Section Y, p. Z] whenever possible.
+- Do not prioritize, rank, recommend, or select target processes at this stage.
+- Clearly mark uncertainty rather than filling gaps with assumptions.
+
+Task
+
+Extract approximately 8 to 12 process candidates from the previous landscape.
+
+Retain only candidates that have:
+
+- a meaningful operational boundary;
+- sufficient source-grounded process logic;
+- a plausible potential relevance to one or more intended PRIME Alert functions.
+
+For each candidate, identify its primary parent domain, related previous findings, operational purpose, process boundary, trigger, actors, key decisions or handovers, expected outcome, supporting evidence, and inferred potential PRIME Alert support areas.
+
+When a candidate spans multiple domains, assign one primary parent domain and list the other relevant domains separately.
+
+Do not create prioritization results, target-process recommendations, BPMN elements, BPMN XML, implementation designs, or technical architecture proposals.
+
+Output Format
+
+Return only the following three outputs.
+
+1. Structured Candidate Record
+
+Create a concise YAML record for use in subsequent prioritization and target-process selection steps.
+
+Use the following structure:
+
+candidate_inventory:
+  summary:
+    - concise summary point
+  candidates:
+    - id: C1
+      name: concise candidate name
+      parent_domain: D1
+      related_domains: [D2]
+      related_findings: [E1, E4]
+      purpose: concise operational purpose
+      operational_context: concise context
+      process_boundary:
+        start: concise initiating point
+        end: concise completion point
+      trigger_or_condition: concise trigger or condition
+      main_actors:
+        - actor or role
+      key_decisions_or_handovers:
+        - concise source-grounded decision, handover, or coordination point
+      expected_outcome: concise outcome
+      source_evidence:
+        - reference: "[JP 4-02, Chapter X, Section Y, p. Z]"
+          evidence_status: Explicit | Partial
+      prime_alert_relevance:
+        inference_status: Inferred
+        potential_support_areas:
+          - monitoring
+          - alerting
+          - decision support
+          - command-unit coordination
+          - field communication
+          - regrouping or extraction support
+        rationale: concise explanation of potential relevance
+      ambiguity_notes:
+        - concise note, if applicable
+
+Keep all field values concise. Preserve identifiers consistently for subsequent prompts.
+
+2. Mermaid Candidate Visualization
+
+Provide only valid Mermaid source code for one hierarchical candidate visualization. Do not render, explain, or preview the diagram.
+
+Requirements:
+
+- Use flowchart TB.
+- Represent every high-level domain as a Mermaid subgraph container.
+- Use the domain identifier and concise domain name directly as the visible subgraph title, for example:
+
+  subgraph DOM_D1["D1: HSS Planning and Command Coordination"]
+
+- Do not create a separate domain-header node inside any domain container.
+- Each domain container must contain only its related candidate nodes.
+- Use candidate containment within the domain container to show domain membership. Do not draw arrows from a domain container to its candidate nodes.
+- Use the subgraph identifiers, for example DOM_D1 and DOM_D2, as endpoints for the main cross-domain relationships.
+- Preserve only the most important cross-domain relationships from the previous landscape, with a maximum of eight arrows in total.
+- Label every cross-domain arrow using a concise relationship label of no more than three words.
+- Do not create cross-domain arrows between candidate nodes.
+- Do not create candidate-to-candidate arrows unless an explicit source-grounded dependency exists within the same domain. Use at most one such internal dependency per domain.
+- Use direction LR inside each subgraph to arrange candidate nodes horizontally where possible.
+- Use the same domain identifiers, concise domain names, and domain color assignment as in the previous landscape.
+- Style every domain container with the assigned restrained pastel fill color, dark border, and readable dark title text.
+- Style candidate nodes with a neutral white or very light fill, dark border, and dark text.
+- Use classDef, class, and style statements only where needed for consistent candidate-node and domain-container styling.
+- Keep candidate labels concise and include both the candidate identifier and name, for example: C1: Health Surveillance and Risk Communication.
+- Avoid BPMN notation, technical system components, scoring, long text labels, or unsupported inferred relations.
+- Arrange domain containers and cross-domain arrows to minimize crossings and long curved lines.
+- Keep the visualization readable and suitable for use as a process-candidate overview in an academic paper.
+
+3. Candidate Set Notes
+
+Provide no more than five concise bullet points describing:
+
+- the main operational areas represented by the candidates;
+- candidates spanning multiple domains;
+- candidates with limited or partial source evidence;
+- important distinctions between closely related candidates.
+
+Do not provide Markdown tables, prioritization scores, target-process recommendations, BPMN elements, BPMN XML, implementation recommendations, or technical architecture proposals.

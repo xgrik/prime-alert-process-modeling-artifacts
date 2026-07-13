@@ -1,0 +1,54 @@
+P1 — LLM-Assisted Document Exploration
+
+You are an analyst of military health operations and business process modeling. Analyze the attached document, Joint Publication 4-02: Health Service Support (2006), and produce a source-grounded document exploration record for a subsequent process-landscape generation stage.
+
+Study Context
+The downstream case study concerns PRIME Alert, a future AI-assisted solution intended to support health and environmental monitoring, alerts, and coordination between responders or soldiers and a Command Unit in high-risk environments. Use this context only to maintain focus on operational military health-management processes. Do not evaluate, rank, or select processes according to PRIME Alert relevance in this step.
+
+Evidence and Scope Rules
+Treat Joint Publication 4-02 as the sole evidence base for process logic.
+Derive activities, actors, triggers, decisions, handovers, escalation paths, and outcomes only from the document.
+Do not assume that the document describes AI, wearable sensors, telemetry, dashboards, automated speech, or other technical components of PRIME Alert.
+Do not invent process elements that are not supported by the source.
+Distinguish explicit process logic from partial or ambiguous evidence.
+Do not treat general policy statements, organizational descriptions, or background information as standalone processes unless they contain explicit operational process logic.
+Preserve references to document chapters, sections, headings, and pages whenever available. If a page number cannot be determined reliably, do not invent it.
+
+Task
+Identify the main process-oriented content in the documentt hat could later be organized into a military health process landscape.
+
+Extract approximately 18--25 source-grounded process findings. Each finding should represent a meaningful operational process fragment, coordination mechanism, or recurring process pattern. Do not yet create final process domains, process candidates, prioritization results, BPMN models, or visualizations.
+
+For each finding, identify:
+a concise provisional title; 
+the relevant operational context;
+main actors or organizational roles;
+trigger, condition, or initiating event, where stated;
+main activities or process logic;
+key decisions, handovers, coordination points, or escalation paths;
+expected outcome, where stated;
+supporting source reference;
+evidence status: Explicit or Partial.
+
+Output Format
+1. Document Exploration Summary
+Provide 3--5 concise bullet points summarizing the main types of process-oriented content identified in the document.
+
+2. Process-Oriented Findings
+Provide a Markdown table with the following columns: ID, Provisional process area, Source-grounded process finding, Main actors, Trigger or condition, Decisions, handovers, or escalation, Expected outcome, Source reference, Evidence status, Use identifiers E1, E2, ....
+
+3. Cross-Cutting Operational Elements
+List recurring elements that occur across multiple findings, such as: common, actors or command structures; recurring handovers; coordination mechanisms; escalation patterns; patient movement or information-flow dependencies. Reference the relevant finding identifiers where possible.
+
+4. Excluded or Ambiguous Content
+Briefly identify content that should not yet be treated as a standalone process because it is primarily policy-oriented, organizational, descriptive, or insufficiently specific.
+
+5. Initial Process Clusters
+Suggest 5-8 preliminary operational clusters that could later be used as inputs for process-landscape generation. For each cluster, list the related finding identifiers only. Do not create a landscape diagram or Mermaid code.
+
+Constraints
+Keep descriptions concise and source-grounded.
+Do not prioritize findings.
+Do not assess PRIME Alert relevance beyond the broad scope stated above.
+Do not produce Mermaid code, BPMN elements, BPMN XML, or implementation recommendations.
+Clearly mark uncertainty rather than filling gaps with assumptions. 

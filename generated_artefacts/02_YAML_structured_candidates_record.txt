@@ -1,0 +1,276 @@
+candidate_inventory:
+  summary:
+    - Identifies ten distinct, modelable medical process candidates distributed across the primary operational domains of JP 4-02.
+    - Maps doctrinal tactical triggers, clinical constraints, and administrative boundaries to prospective digital support functions.
+    - Isolates specific data-handling and physical tracking workflows where automated alerting or remote coordination capabilities show structural alignment.
+  candidates:
+    - id: C1
+      name: Tactical Point-of-Injury Trauma Stabilization
+      parent_domain: D2
+      related_domains: [D4]
+      related_findings: [E1, E13]
+      purpose: To apply immediate medical intervention to stabilize trauma and secure life-saving priorities at the point of injury.
+      operational_context: Immediate field response following an acute trauma event under operational or combat conditions.
+      process_boundary:
+        start: Occurrence of casualty trauma at the tactical unit level
+        end: Handover of the stabilized patient to arriving evacuation crews or forward medical elements
+      trigger_or_condition: A tactical unit suffers casualties requiring urgent localized medical field intervention.
+      main_actors: [Combat Medics, First Responders, Unit Leadership]
+      key_decisions_or_handovers:
+        - Tactical triage balancing care priorities with immediate threat suppression vectors.
+        - Physical and diagnostic information handover recorded on tactical triage logs for arriving teams.
+      expected_outcome: Casualty hemorrhage and airway threats are suppressed to enable safe transit packing.
+      source_evidence:
+        - reference: "[JP 4-02, Chapter I, Section 2, p. I-4]"
+          evidence_status: Explicit
+      prime_alert_relevance:
+        inference_status: Inferred
+        potential_support_areas:
+          - monitoring
+          - alerting
+          - decision support
+          - field communication
+        rationale: Real-time physiological telemetry could automate trauma triage warnings and stream patient diagnostic logs to downstream teams before arrival.
+      ambiguity_notes: []
+    - id: C2
+      name: Frontline Mass Casualty Triage Allocation
+      parent_domain: D2
+      related_domains: [D1]
+      related_findings: [E7]
+      purpose: To implement prioritized categorization matrices when patient volume completely overloads standard individual care capacity.
+      operational_context: Sudden influx of multi-patient trauma overwhelming localized forward clinical nodes or treatment points.
+      process_boundary:
+        start: Facility Commander officially declares a local mass casualty surge state
+        end: Re-establishment of baseline capacity and resumption of standard individual care protocols
+      trigger_or_condition: Volume of incoming patients simultaneously exceeds the processing, workspace, or staffing threshold of the medical node.
+      main_actors: [MTF Commander, Designated Triage Officers, Facility Medical Providers]
+      key_decisions_or_handovers:
+        - Suspending standard clinical workflows to implement resource-rationing protocols.
+        - Sorting patients into explicit tactical categories (Immediate, Delayed, Minimal, Expectant).
+      expected_outcome: Maximization of survival metrics across the collective cohort via structural prioritization.
+      source_evidence:
+        - reference: "[JP 4-02, Chapter IV, Section 5, p. IV-25]"
+          evidence_status: Explicit
+      prime_alert_relevance:
+        inference_status: Inferred
+        potential_support_areas:
+          - alerting
+          - decision support
+          - command-unit coordination
+        rationale: Aggregated triage queue data could provide decision support models for real-time allocation optimization and clear command-unit tracking.
+      ambiguity_notes: []
+    - id: C3
+      name: Boundary-Level CBRN Decontamination and Intake
+      parent_domain: D2
+      related_domains: []
+      related_findings: [E8]
+      purpose: To establish safety barriers at the facility perimeter to strip toxic agents before clinical intake.
+      operational_context: Reception of casualties who have encountered weaponized chemical, biological, or radiological materials.
+      process_boundary:
+        start: Casualties suspected of toxic contamination arrive at the medical facility boundary
+        end: Safe transfer of completely cleared individuals across the warm-to-cold boundary into triage
+      trigger_or_condition: Clinical or intelligence confirmation that arriving patients have tracking histories or symptoms of chemical/biological exposure.
+      main_actors: [Facility Decontamination Teams, Triage Officers, Clinical Staff]
+      key_decisions_or_handovers:
+        - Determination of decontamination completeness at the validation checkpoint.
+        - Modifying standard trauma triage order based on concurrent acute toxic shock indicators.
+      expected_outcome: Neutralization of secondary contamination vectors inside the clean medical footprint.
+      source_evidence:
+        - reference: "[JP 4-02, Chapter IV, Section 5, p. IV-22]"
+          evidence_status: Explicit
+      prime_alert_relevance:
+        inference_status: Inferred
+        potential_support_areas:
+          - monitoring
+          - alerting
+          - decision support
+        rationale: Wearable environmental threat tracking could alert perimeter teams to toxic exposure levels and update clinical decontamination guidance.
+      ambiguity_notes: []
+    - id: C4
+      name: Tactical 9-Line MEDEVAC Request Execution
+      parent_domain: D4
+      related_domains: [D2]
+      related_findings: [E1]
+      purpose: To format, compile, and stream standardized extraction requests for urgent medical transit lift options.
+      operational_context: Tactical extraction coordination originating from frontline units in hazardous fields.
+      process_boundary:
+        start: Field medic confirms a necessity for physical evacuation assets
+        end: Mission authorization issued and transport platform dispatched to specified coordinates
+      trigger_or_condition: Patient injury classification requires higher echelon intervention unattainable at the current position.
+      main_actors: [Line Medics, Tactical Operations Center Operators, Evacuation Crews]
+      key_decisions_or_handovers:
+        - Assignment of definitive evacuation precedence tiers (Urgent, Priority, Routine).
+        - Direct physical handover of patient control to the arriving extraction crew.
+      expected_outcome: Standardized tactical code validation followed by swift medical transport routing.
+      source_evidence:
+        - reference: "[JP 4-02, Appendix B, Section 5, p. B-19]"
+          evidence_status: Explicit
+      prime_alert_relevance:
+        inference_status: Inferred
+        potential_support_areas:
+          - field communication
+          - command-unit coordination
+          - regrouping or extraction support
+        rationale: Automated conversion of physiological trends and positioning variables could generate and transmit structured 9-Line logs via voice or digital data streams.
+      ambiguity_notes: []
+    - id: C5
+      name: Inter-Theater Patient Movement Request Validation
+      parent_domain: D4
+      related_domains: [D3]
+      related_findings: [E2, E16]
+      purpose: To medically certify, track, and clear casualties entering the centralized joint aeromedical regulation network.
+      operational_context: Formally regulating patients for movement from theater nodes to strategic care zones.
+      process_boundary:
+        start: Medical officer logs a transport demand record into the tracking network
+        end: Validation completed and patient safely integrated into an approved mobility flight manifest
+      trigger_or_condition: Patient diagnostic assessments establish that treatment timelines outlast local theater evacuation hold rules.
+      main_actors: [Originating MTF Patient Administration, Flight Surgeons, JPMRC Personnel, JMCC Controllers]
+      key_decisions_or_handovers:
+        - Clinical flight clearance verification provided by an authorized flight surgeon.
+        - Handover of air transport manifest slots between medical teams and logistics line controllers.
+      expected_outcome: Regulated tracking entry validation and coordinated strategic transit authorization.
+      source_evidence:
+        - reference: "[JP 4-02, Chapter II, Section 4, p. II-34]"
+          evidence_status: Explicit
+      prime_alert_relevance:
+        inference_status: Inferred
+        potential_support_areas:
+          - decision support
+          - command-unit coordination
+        rationale: Interfacing patient database tracking with mobility scheduling could automatically flag transit-ready cohorts based on clinical benchmarks.
+      ambiguity_notes: []
+    - id: C6
+      name: Unregulated Tactical Casualty Reception and Logging
+      parent_domain: D3
+      related_domains: []
+      related_findings: [E18]
+      purpose: To register and screen arriving casualties delivered without prior coordination.
+      operational_context: Emergency reception management at facility gates for unannounced frontline vehicles.
+      process_boundary:
+        start: Unannounced combat or logistics vehicles arrive with casualties at the perimeter
+        end: Casualties logged into the hospital ledger and transferred to clinical providers
+      trigger_or_condition: Sudden physical delivery of injured individuals missing tracking records or automated movement validation inputs.
+      main_actors: [Facility Reception Teams, Patient Administration Personnel, Delivering Tactical Combat Crews]
+      key_decisions_or_handovers:
+        - Immediate perimeter gate screening priority allocation.
+        - Structural creation of new data tracking records within the joint accountability registry.
+      expected_outcome: Complete medical logging and accountability capture for previously untracked patients.
+      source_evidence:
+        - reference: "[JP 4-02, Appendix A, Section 2, p. A-6]"
+          evidence_status: Partial
+      prime_alert_relevance:
+        inference_status: Inferred
+        potential_support_areas:
+          - monitoring
+          - command-unit coordination
+        rationale: Automated proximity proximity scans or field identity tracking could log arriving personnel before manual paperwork intake occurs.
+      ambiguity_notes:
+        - Precise tactical communication handovers from non-medical delivery drivers to gate staff are poorly documented in doctrine.
+    - id: C7
+      name: Daily Joint Medical Operations Center Capacity Tracking
+      parent_domain: D1
+      related_domains: [D3]
+      related_findings: [E4]
+      purpose: To generate unified visibility of theater bed spaces, surgical capabilities, and medical status.
+      operational_context: Centralized command oversight managed inside the core joint headquarters task force.
+      process_boundary:
+        start: Reaching a daily reporting cutoff window or detecting major asset status changes
+        end: Final production and transmission of the integrated joint MEDSITREP to command elements
+      trigger_or_condition: Scheduled battle rhythm obligations or significant resource changes requiring command validation.
+      main_actors: [Joint Medical Operations Center Staff, Component Medical Operations Staff, JTF J-3 Liaison]
+      key_decisions_or_handovers:
+        - Deciding to escalate severe asset shortages directly to the primary JTF Commander.
+        - Directing balanced casualty rerouting maneuvers across separate component treatment nodes.
+      expected_outcome: Comprehensive situational awareness across all joint healthcare capabilities within the operational zone.
+      source_evidence:
+        - reference: "[JP 4-02, Chapter II, Section 4, p. II-31]"
+          evidence_status: Explicit
+      prime_alert_relevance:
+        inference_status: Inferred
+        potential_support_areas:
+          - monitoring
+          - command-unit coordination
+          - decision support
+        rationale: Automated aggregation of real-time facility logistics and bed metrics would eliminate manual spreadsheet tracking overhead.
+      ambiguity_notes: []
+    - id: C8
+      name: Disease and Non-Battle Injury Health Hazard Tracking
+      parent_domain: D6
+      related_domains: [D1]
+      related_findings: [E9, E11]
+      purpose: To monitor field environmental vectors, identify infectious spikes, and initiate force protection safeguards.
+      operational_context: Deployed environmental assessment and threat tracking across the area of operations.
+      process_boundary:
+        start: Deployment of preventive medicine surveillance tracking mechanisms or data sweeps
+        end: Dissemination of validated health threat profiles and implementation of defensive countermeasures
+      trigger_or_condition: Detection of anomalous local non-battle injury clusters, biological hazards, or toxic conditions.
+      main_actors: [Preventive Medicine Teams, Deployed Epidemiologists, Unit Medical Officers]
+      key_decisions_or_handovers:
+        - Escalation of severe localized toxic or health threat warnings to tactical unit leadership.
+        - Handover of local environmental threat vectors to engineering networks for structural site mitigation.
+      expected_outcome: Actionable health alert updates and vector mitigation parameters embedded in joint plans.
+      source_evidence:
+        - reference: "[JP 4-02, Chapter I, Section 2, p. I-3]"
+          evidence_status: Explicit
+      prime_alert_relevance:
+        inference_status: Inferred
+        potential_support_areas:
+          - monitoring
+          - alerting
+          - decision support
+        rationale: Continuous tracking of local environmental parameters and physiological anomalies can flag biological or chemical hazards early.
+      ambiguity_notes: []
+    - id: C9
+      name: Theater Blood Supply Matrix Reporting
+      parent_domain: D5
+      related_domains: []
+      related_findings: [E5]
+      purpose: To compile, track, and balance blood inventories to preserve baseline stocks across frontline units.
+      operational_context: Continuous blood product lifecycle logistics tracking managed at the theater level.
+      process_boundary:
+        start: Reaching scheduled reporting deadlines or detecting regional storage depletion points
+        end: Execution of inter-facility stock rebalancing distributions or launch of strategic replenishment orders
+      trigger_or_condition: Reaching recurring report deadlines or identifying stock levels tracking below authorized baselines.
+      main_actors: [MTF Transfusion Personnel, Blood Supply Units, Joint Blood Program Officer]
+      key_decisions_or_handovers:
+        - Launching immediate local stock rebalancing movements between theater entities.
+        - Escalating emergency manufacturing and transport requests back to national supply chains.
+      expected_outcome: Maintenance of balanced, unexpired blood product allocations across all critical care sites.
+      source_evidence:
+        - reference: "[JP 4-02, Appendix D, Section 4, p. D-12]"
+          evidence_status: Explicit
+      prime_alert_relevance:
+        inference_status: Inferred
+        potential_support_areas:
+          - monitoring
+          - decision support
+          - command-unit coordination
+        rationale: Live tracking of cold-chain status parameters and burn rates can predict logistical shortfalls during high-tempo triage events.
+      ambiguity_notes: []
+    - id: C10
+      name: Patient Movement Item Tracking and Maintenance Swap
+      parent_domain: D5
+      related_domains: [D4]
+      related_findings: [E6]
+      purpose: To log, account for, and return standardized life-cycle medical apparatus accompanying transit patients.
+      operational_context: Managing clinical hardware loops across intra-theater and inter-theater boundaries.
+      process_boundary:
+        start: Specialized clinical equipment departs an MTF alongside a regulated patient
+        end: Equipment check-in validation, sterilization, and registration into local buffer inventory systems
+      trigger_or_condition: Initialization of a medical evacuation transit requiring active life support electronics or gear.
+      main_actors: [En-Route Medical Personnel, Originating MTF Logisticians, Theater PMI Cell Managers]
+      key_decisions_or_handovers:
+        - Authorizing a physical item-for-item gear swap versus registering the equipment asset into tracking registries.
+        - Escalating specialized hardware shortfalls to the central theater lead logistics agent.
+      expected_outcome: Maintenance of critical equipment buffer levels to prevent capability gaps at forward care points.
+      source_evidence:
+        - reference: "[JP 4-02, Appendix C, Section 1, p. C-1]"
+          evidence_status: Partial
+      prime_alert_relevance:
+        inference_status: Inferred
+        potential_support_areas:
+          - monitoring
+          - command-unit coordination
+        rationale: Digital asset tracking tags could automate hardware inventory logs at transit hubs and signal maintenance requirements.
+      ambiguity_notes:
+        - Return routes and component accountability limits for specialized transport gear are often altered by informal local workarounds.
