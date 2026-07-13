@@ -66,7 +66,7 @@ This subdirectory contains the prompts used during the final BPMN model generati
 
 The final generation stage applies the previously proposed multi-step LLM-based BPMN generation workflow. Consequently, these prompts were adopted from the authors' earlier work and are identical to the prompts available in the corresponding repository:
 
-[Generating BPMN Healthcare Process Models Using LLMs – Supplementary Artifacts](https://github.com/xgrik/dp-grik-artifacts)
+[Generating BPMN Healthcare Process Models Using LLMs – Supplementary Artifacts](https://github.com/xgrik/llm-bpmn-generation-artifacts)
 
 They are included in this repository to provide a complete record of the prompts used across the entire pipeline and to make the case study artifacts self-contained.
 
