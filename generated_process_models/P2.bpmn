@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_0i3pgsi" targetNamespace="http://bpmn.io/schema/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" exporter="Camunda Modeler" exporterVersion="5.33.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.22.0">
+  <bpmn:process id="Process_1juweid" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Need for Evacuation Determined"> <!--[cite: 1] -->
+      <bpmn:outgoing>SF_Start_to_Compile</bpmn:outgoing>
+    </bpmn:startEvent>
+    
+    <bpmn:userTask id="Task_Compile" name="Compile Casualty Parameters (Lines 1-9)"> <!--[cite: 1] -->
+      <bpmn:incoming>SF_Start_to_Compile</bpmn:incoming>
+      <bpmn:incoming>SF_Validation_Fail</bpmn:incoming>
+      <bpmn:outgoing>SF_Compile_to_Categorize</bpmn:outgoing>
+    </bpmn:userTask>
+    
+    <bpmn:businessRuleTask id="Task_Categorize" name="Categorize Injury Severity"> <!--[cite: 1] -->
+      <bpmn:incoming>SF_Compile_to_Categorize</bpmn:incoming>
+      <bpmn:outgoing>SF_Categorize_to_GWSeverity</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    
+    <bpmn:exclusiveGateway id="Gateway_Severity" name="Injury Severity?"> <!--[cite: 1] -->
+      <bpmn:incoming>SF_Categorize_to_GWSeverity</bpmn:incoming>
+      <bpmn:outgoing>SF_Urgent</bpmn:outgoing>
+      <bpmn:outgoing>SF_Priority</bpmn:outgoing>
+      <bpmn:outgoing>SF_Routine</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    
+    <bpmn:userTask id="Task_Equipment" name="Verify Specialized Equipment Requirements"> <!--[cite: 1] -->
+      <bpmn:incoming>SF_Urgent</bpmn:incoming>
+      <bpmn:incoming>SF_Priority</bpmn:incoming>
+      <bpmn:incoming>SF_Routine</bpmn:incoming>
+      <bpmn:outgoing>SF_Equipment_to_Transmit</bpmn:outgoing>
+    </bpmn:userTask>
+    
+    <bpmn:userTask id="Task_Transmit" name="Transmit Request via Secure Radio"> <!--[cite: 1] -->
+      <bpmn:incoming>SF_Equipment_to_Transmit</bpmn:incoming>
+      <bpmn:incoming>SF_Handshake_Drop</bpmn:incoming>
+      <bpmn:outgoing>SF_Transmit_to_GWHandshake</bpmn:outgoing>
+    </bpmn:userTask>
+    
+    <bpmn:exclusiveGateway id="Gateway_Handshake" name="Radio Handshake Status?"> <!--[cite: 1] -->
+      <bpmn:incoming>SF_Transmit_to_GWHandshake</bpmn:incoming>
+      <bpmn:outgoing>SF_Handshake_Success</bpmn:outgoing>
+      <bpmn:outgoing>SF_Handshake_Drop</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    
+    <bpmn:serviceTask id="Task_Route" name="Route and Process Evacuation Request"> <!--[cite: 1] -->
+      <bpmn:incoming>SF_Handshake_Success</bpmn:incoming>
+      <bpmn:outgoing>SF_Route_to_Validate</bpmn:outgoing>
+    </bpmn:serviceTask>
+    
+    <bpmn:businessRuleTask id="Task_Validate" name="Validate and Review Request Parameters"> <!--[cite: 1] -->
+      <bpmn:incoming>SF_Route_to_Validate</bpmn:incoming>
+      <bpmn:outgoing>SF_Validate_to_GWValidation</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    
+    <bpmn:exclusiveGateway id="Gateway_Validation" name="Validation Status?"> <!--[cite: 1] -->
+      <bpmn:incoming>SF_Validate_to_GWValidation</bpmn:incoming>
+      <bpmn:outgoing>SF_Validation_Pass</bpmn:outgoing>
+      <bpmn:outgoing>SF_Validation_Fail</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    
+    <bpmn:userTask id="Task_Accept" name="Accept MEDEVAC Request"> <!--[cite: 1] -->
+      <bpmn:incoming>SF_Validation_Pass</bpmn:incoming>
+      <bpmn:outgoing>SF_Accept_to_Dispatch</bpmn:outgoing>
+    </bpmn:userTask>
+    
+    <bpmn:serviceTask id="Task_Dispatch" name="Dispatch Evacuation Asset"> <!--[cite: 1] -->
+      <bpmn:incoming>SF_Accept_to_Dispatch</bpmn:incoming>
+      <bpmn:outgoing>SF_Dispatch_to_End</bpmn:outgoing>
+    </bpmn:serviceTask>
+    
+    <bpmn:endEvent id="EndEvent_1" name="Evacuation Asset Dispatched"> <!--[cite: 1] -->
+      <bpmn:incoming>SF_Dispatch_to_End</bpmn:incoming>
+    </bpmn:endEvent>
+    
+    <bpmn:sequenceFlow id="SF_Start_to_Compile" sourceRef="StartEvent_1" targetRef="Task_Compile" />
+    <bpmn:sequenceFlow id="SF_Compile_to_Categorize" sourceRef="Task_Compile" targetRef="Task_Categorize" />
+    <bpmn:sequenceFlow id="SF_Categorize_to_GWSeverity" sourceRef="Task_Categorize" targetRef="Gateway_Severity" />
+    <bpmn:sequenceFlow id="SF_Urgent" name="Urgent" sourceRef="Gateway_Severity" targetRef="Task_Equipment" /> <!--[cite: 1] -->
+    <bpmn:sequenceFlow id="SF_Priority" name="Priority" sourceRef="Gateway_Severity" targetRef="Task_Equipment" /> <!--[cite: 1] -->
+    <bpmn:sequenceFlow id="SF_Routine" name="Routine" sourceRef="Gateway_Severity" targetRef="Task_Equipment" /> <!--[cite: 1] -->
+    <bpmn:sequenceFlow id="SF_Equipment_to_Transmit" sourceRef="Task_Equipment" targetRef="Task_Transmit" />
+    <bpmn:sequenceFlow id="SF_Transmit_to_GWHandshake" sourceRef="Task_Transmit" targetRef="Gateway_Handshake" />
+    <bpmn:sequenceFlow id="SF_Handshake_Success" name="Successful Handshake" sourceRef="Gateway_Handshake" targetRef="Task_Route" /> <!--[cite: 1] -->
+    <bpmn:sequenceFlow id="SF_Handshake_Drop" name="Radio Contact Drops" sourceRef="Gateway_Handshake" targetRef="Task_Transmit" /> <!--[cite: 1] -->
+    <bpmn:sequenceFlow id="SF_Route_to_Validate" sourceRef="Task_Route" targetRef="Task_Validate" />
+    <bpmn:sequenceFlow id="SF_Validate_to_GWValidation" sourceRef="Task_Validate" targetRef="Gateway_Validation" />
+    <bpmn:sequenceFlow id="SF_Validation_Pass" name="Validated and Accepted" sourceRef="Gateway_Validation" targetRef="Task_Accept" /> <!--[cite: 1] -->
+    <bpmn:sequenceFlow id="SF_Validation_Fail" name="Validation Failure" sourceRef="Gateway_Validation" targetRef="Task_Compile" /> <!--[cite: 1] -->
+    <bpmn:sequenceFlow id="SF_Accept_to_Dispatch" sourceRef="Task_Accept" targetRef="Task_Dispatch" />
+    <bpmn:sequenceFlow id="SF_Dispatch_to_End" sourceRef="Task_Dispatch" targetRef="EndEvent_1" />
+  </bpmn:process>
+  
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1juweid">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="182" y="162" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Compile_di" bpmnElement="Task_Compile">
+        <dc:Bounds x="270" y="140" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Categorize_di" bpmnElement="Task_Categorize">
+        <dc:Bounds x="420" y="140" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Severity_di" bpmnElement="Gateway_Severity" isMarkerVisible="true">
+        <dc:Bounds x="570" y="155" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Equipment_di" bpmnElement="Task_Equipment">
+        <dc:Bounds x="670" y="140" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Transmit_di" bpmnElement="Task_Transmit">
+        <dc:Bounds x="820" y="140" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Handshake_di" bpmnElement="Gateway_Handshake" isMarkerVisible="true">
+        <dc:Bounds x="970" y="155" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Route_di" bpmnElement="Task_Route">
+        <dc:Bounds x="1070" y="140" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Validate_di" bpmnElement="Task_Validate">
+        <dc:Bounds x="1220" y="140" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Validation_di" bpmnElement="Gateway_Validation" isMarkerVisible="true">
+        <dc:Bounds x="1370" y="155" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Accept_di" bpmnElement="Task_Accept">
+        <dc:Bounds x="1470" y="140" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Dispatch_di" bpmnElement="Task_Dispatch">
+        <dc:Bounds x="1620" y="140" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1_di" bpmnElement="EndEvent_1">
+        <dc:Bounds x="1772" y="162" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNEdge id="SF_Start_to_Compile_di" bpmnElement="SF_Start_to_Compile">
+        <di:waypoint x="218" y="180" />
+        <di:waypoint x="270" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SF_Compile_to_Categorize_di" bpmnElement="SF_Compile_to_Categorize">
+        <di:waypoint x="370" y="180" />
+        <di:waypoint x="420" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SF_Categorize_to_GWSeverity_di" bpmnElement="SF_Categorize_to_GWSeverity">
+        <di:waypoint x="520" y="180" />
+        <di:waypoint x="570" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SF_Urgent_di" bpmnElement="SF_Urgent">
+        <di:waypoint x="595" y="155" />
+        <di:waypoint x="595" y="100" />
+        <di:waypoint x="720" y="100" />
+        <di:waypoint x="720" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SF_Priority_di" bpmnElement="SF_Priority">
+        <di:waypoint x="620" y="180" />
+        <di:waypoint x="670" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SF_Routine_di" bpmnElement="SF_Routine">
+        <di:waypoint x="595" y="205" />
+        <di:waypoint x="595" y="260" />
+        <di:waypoint x="720" y="260" />
+        <di:waypoint x="720" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SF_Equipment_to_Transmit_di" bpmnElement="SF_Equipment_to_Transmit">
+        <di:waypoint x="770" y="180" />
+        <di:waypoint x="820" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SF_Transmit_to_GWHandshake_di" bpmnElement="SF_Transmit_to_GWHandshake">
+        <di:waypoint x="920" y="180" />
+        <di:waypoint x="970" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SF_Handshake_Success_di" bpmnElement="SF_Handshake_Success">
+        <di:waypoint x="1020" y="180" />
+        <di:waypoint x="1070" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SF_Handshake_Drop_di" bpmnElement="SF_Handshake_Drop">
+        <di:waypoint x="995" y="155" />
+        <di:waypoint x="995" y="80" />
+        <di:waypoint x="870" y="80" />
+        <di:waypoint x="870" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SF_Route_to_Validate_di" bpmnElement="SF_Route_to_Validate">
+        <di:waypoint x="1170" y="180" />
+        <di:waypoint x="1220" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SF_Validate_to_GWValidation_di" bpmnElement="SF_Validate_to_GWValidation">
+        <di:waypoint x="1320" y="180" />
+        <di:waypoint x="1370" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SF_Validation_Pass_di" bpmnElement="SF_Validation_Pass">
+        <di:waypoint x="1420" y="180" />
+        <di:waypoint x="1470" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SF_Validation_Fail_di" bpmnElement="SF_Validation_Fail">
+        <di:waypoint x="1395" y="205" />
+        <di:waypoint x="1395" y="320" />
+        <di:waypoint x="320" y="320" />
+        <di:waypoint x="320" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SF_Accept_to_Dispatch_di" bpmnElement="SF_Accept_to_Dispatch">
+        <di:waypoint x="1570" y="180" />
+        <di:waypoint x="1620" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SF_Dispatch_to_End_di" bpmnElement="SF_Dispatch_to_End">
+        <di:waypoint x="1720" y="180" />
+        <di:waypoint x="1772" y="180" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

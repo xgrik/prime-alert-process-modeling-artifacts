@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" 
+                  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" 
+                  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" 
+                  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+                  xmlns:camunda="http://camunda.org/schema/1.0/bpmn" 
+                  id="Definitions_0i3pgsi" 
+                  targetNamespace="http://bpmn.io/schema/bpmn" 
+                  xmlns:modeler="http://camunda.org/schema/modeler/1.0" 
+                  exporter="Camunda Modeler" 
+                  exporterVersion="5.33.1" 
+                  modeler:executionPlatform="Camunda Platform" 
+                  modeler:executionPlatformVersion="7.22.0">
+  <bpmn:process id="Process_1juweid" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Daily logs and indices registered" />
+    <bpmn:exclusiveGateway id="Gateway_Scope" name="Scope of Assignment Verification" />
+    <bpmn:endEvent id="EndEvent_Bypass" name="Process Exempt - Routine Shipboard" />
+    <bpmn:serviceTask id="Task_IdentifyPAR" name="Identify Population at Risk (PAR)" camunda:type="expression" camunda:expression="${true}" />
+    <bpmn:userTask id="Task_EstablishBaseline" name="Establish Medical Surveillance Baseline" />
+    <bpmn:userTask id="Task_ConductSampling" name="Conduct OEH Sampling" />
+    <bpmn:userTask id="Task_CollectForward" name="Collect and Forward Hazardous Material Samples" />
+    <bpmn:serviceTask id="Task_DocumentExposures" name="Document Individual Exposures" camunda:type="expression" camunda:expression="${true}" />
+    <bpmn:businessRuleTask id="Task_EvaluateDeviation" name="Evaluate Surveillance Baseline Deviation" />
+    <bpmn:exclusiveGateway id="Gateway_Deviation" name="Surveillance Baseline Deviation Check" />
+    <bpmn:userTask id="Task_ORM1_IdentifyHazards" name="Identify the Hazards" />
+    <bpmn:userTask id="Task_ORM2_AssessRisks" name="Assess the Risks" />
+    <bpmn:userTask id="Task_ORM3_AnalyzeControls" name="Analyze Risk Control Measures" />
+    <bpmn:businessRuleTask id="Task_ORM4_MakeDecisions" name="Make Control Decisions" />
+    <bpmn:userTask id="Task_ORM5_ImplementControls" name="Implement Risk Controls" />
+    <bpmn:userTask id="Task_ORM6_SuperviseReview" name="Supervise and Review" />
+    <bpmn:exclusiveGateway id="Gateway_Effectiveness" name="Evaluation of Risk Control Effectiveness" />
+    <bpmn:serviceTask id="Task_Archive" name="Archive Surveillance Data" camunda:type="expression" camunda:expression="${true}" />
+    <bpmn:endEvent id="EndEvent_Success" name="Aggregated health reports sent to Joint Force Surgeon" />
+
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="StartEvent_1" targetRef="Gateway_Scope" />
+    <bpmn:sequenceFlow id="Flow_Bypass" name="Routine Shipboard" sourceRef="Gateway_Scope" targetRef="EndEvent_Bypass" />
+    <bpmn:sequenceFlow id="Flow_Ashore" name="Ashore Field Operations" sourceRef="Gateway_Scope" targetRef="Task_IdentifyPAR" />
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="Task_IdentifyPAR" targetRef="Task_EstablishBaseline" />
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="Task_EstablishBaseline" targetRef="Task_ConductSampling" />
+    <bpmn:sequenceFlow id="Flow_4" sourceRef="Task_ConductSampling" targetRef="Task_CollectForward" />
+    <bpmn:sequenceFlow id="Flow_5" sourceRef="Task_CollectForward" targetRef="Task_DocumentExposures" />
+    <bpmn:sequenceFlow id="Flow_6" sourceRef="Task_DocumentExposures" targetRef="Task_EvaluateDeviation" />
+    <bpmn:sequenceFlow id="Flow_7" sourceRef="Task_EvaluateDeviation" targetRef="Gateway_Deviation" />
+    <bpmn:sequenceFlow id="Flow_NoDeviation" name="No Deviation Detected" sourceRef="Gateway_Deviation" targetRef="Task_Archive" />
+    <bpmn:sequenceFlow id="Flow_Deviation" name="Deviation Detected" sourceRef="Gateway_Deviation" targetRef="Task_ORM1_IdentifyHazards" />
+    <bpmn:sequenceFlow id="Flow_8" sourceRef="Task_ORM1_IdentifyHazards" targetRef="Task_ORM2_AssessRisks" />
+    <bpmn:sequenceFlow id="Flow_9" sourceRef="Task_ORM2_AssessRisks" targetRef="Task_ORM3_AnalyzeControls" />
+    <bpmn:sequenceFlow id="Flow_10" sourceRef="Task_ORM3_AnalyzeControls" targetRef="Task_ORM4_MakeDecisions" />
+    <bpmn:sequenceFlow id="Flow_11" sourceRef="Task_ORM4_MakeDecisions" targetRef="Task_ORM5_ImplementControls" />
+    <bpmn:sequenceFlow id="Flow_12" sourceRef="Task_ORM5_ImplementControls" targetRef="Task_ORM6_SuperviseReview" />
+    <bpmn:sequenceFlow id="Flow_13" sourceRef="Task_ORM6_SuperviseReview" targetRef="Gateway_Effectiveness" />
+    <bpmn:sequenceFlow id="Flow_Ineffective" name="Controls Ineffective" sourceRef="Gateway_Effectiveness" targetRef="Task_ORM1_IdentifyHazards" />
+    <bpmn:sequenceFlow id="Flow_Effective" name="Controls Effective" sourceRef="Gateway_Effectiveness" targetRef="Task_Archive" />
+    <bpmn:sequenceFlow id="Flow_14" sourceRef="Task_Archive" targetRef="EndEvent_Success" />
+  </bpmn:process>
+
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1juweid">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="100" y="160" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Scope_di" bpmnElement="Gateway_Scope" isMarkerVisible="true">
+        <dc:Bounds x="200" y="153" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_Bypass_di" bpmnElement="EndEvent_Bypass">
+        <dc:Bounds x="207" y="62" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_IdentifyPAR_di" bpmnElement="Task_IdentifyPAR">
+        <dc:Bounds x="300" y="138" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_EstablishBaseline_di" bpmnElement="Task_EstablishBaseline">
+        <dc:Bounds x="440" y="138" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ConductSampling_di" bpmnElement="Task_ConductSampling">
+        <dc:Bounds x="580" y="138" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_CollectForward_di" bpmnElement="Task_CollectForward">
+        <dc:Bounds x="720" y="138" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_DocumentExposures_di" bpmnElement="Task_DocumentExposures">
+        <dc:Bounds x="860" y="138" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_EvaluateDeviation_di" bpmnElement="Task_EvaluateDeviation">
+        <dc:Bounds x="1000" y="138" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Deviation_di" bpmnElement="Gateway_Deviation" isMarkerVisible="true">
+        <dc:Bounds x="1150" y="153" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ORM1_IdentifyHazards_di" bpmnElement="Task_ORM1_IdentifyHazards">
+        <dc:Bounds x="1125" y="280" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ORM2_AssessRisks_di" bpmnElement="Task_ORM2_AssessRisks">
+        <dc:Bounds x="1270" y="280" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ORM3_AnalyzeControls_di" bpmnElement="Task_ORM3_AnalyzeControls">
+        <dc:Bounds x="1410" y="280" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ORM4_MakeDecisions_di" bpmnElement="Task_ORM4_MakeDecisions">
+        <dc:Bounds x="1550" y="280" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ORM5_ImplementControls_di" bpmnElement="Task_ORM5_ImplementControls">
+        <dc:Bounds x="1690" y="280" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ORM6_SuperviseReview_di" bpmnElement="Task_ORM6_SuperviseReview">
+        <dc:Bounds x="1830" y="280" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Effectiveness_di" bpmnElement="Gateway_Effectiveness" isMarkerVisible="true">
+        <dc:Bounds x="1980" y="295" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Archive_di" bpmnElement="Task_Archive">
+        <dc:Bounds x="2150" y="138" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_Success_di" bpmnElement="EndEvent_Success">
+        <dc:Bounds x="2300" y="160" width="36" height="36" />
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="136" y="178" />
+        <di:waypoint x="200" y="178" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Bypass_di" bpmnElement="Flow_Bypass">
+        <di:waypoint x="225" y="153" />
+        <di:waypoint x="225" y="98" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Ashore_di" bpmnElement="Flow_Ashore">
+        <di:waypoint x="250" y="178" />
+        <di:waypoint x="300" y="178" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="400" y="178" />
+        <di:waypoint x="440" y="178" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <di:waypoint x="540" y="178" />
+        <di:waypoint x="580" y="178" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4">
+        <di:waypoint x="680" y="178" />
+        <di:waypoint x="720" y="178" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_5_di" bpmnElement="Flow_5">
+        <di:waypoint x="820" y="178" />
+        <di:waypoint x="860" y="178" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_6_di" bpmnElement="Flow_6">
+        <di:waypoint x="960" y="178" />
+        <di:waypoint x="1000" y="178" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_7_di" bpmnElement="Flow_7">
+        <di:waypoint x="1100" y="178" />
+        <di:waypoint x="1150" y="178" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_NoDeviation_di" bpmnElement="Flow_NoDeviation">
+        <di:waypoint x="1200" y="178" />
+        <di:waypoint x="2150" y="178" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Deviation_di" bpmnElement="Flow_Deviation">
+        <di:waypoint x="1175" y="203" />
+        <di:waypoint x="1175" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_8_di" bpmnElement="Flow_8">
+        <di:waypoint x="1225" y="320" />
+        <di:waypoint x="1270" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_9_di" bpmnElement="Flow_9">
+        <di:waypoint x="1370" y="320" />
+        <di:waypoint x="1410" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_10_di" bpmnElement="Flow_10">
+        <di:waypoint x="1510" y="320" />
+        <di:waypoint x="1550" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_11_di" bpmnElement="Flow_11">
+        <di:waypoint x="1650" y="320" />
+        <di:waypoint x="1690" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_12_di" bpmnElement="Flow_12">
+        <di:waypoint x="1790" y="320" />
+        <di:waypoint x="1830" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_13_di" bpmnElement="Flow_13">
+        <di:waypoint x="1930" y="320" />
+        <di:waypoint x="1980" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Ineffective_di" bpmnElement="Flow_Ineffective">
+        <di:waypoint x="2005" y="345" />
+        <di:waypoint x="2005" y="400" />
+        <di:waypoint x="1175" y="400" />
+        <di:waypoint x="1175" y="360" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Effective_di" bpmnElement="Flow_Effective">
+        <di:waypoint x="2005" y="295" />
+        <di:waypoint x="2005" y="178" />
+        <di:waypoint x="2150" y="178" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_14_di" bpmnElement="Flow_14">
+        <di:waypoint x="2250" y="178" />
+        <di:waypoint x="2300" y="178" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

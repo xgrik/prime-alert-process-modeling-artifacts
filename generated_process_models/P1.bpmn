@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_0i3pgsi" targetNamespace="http://bpmn.io/schema/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" exporter="Camunda Modeler" exporterVersion="5.33.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.22.0">
+  <bpmn:process id="Process_1juweid" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_POITrauma" name="Acute physical injury sustained">
+      <bpmn:outgoing>Flow_To_ThreatCheck</bpmn:outgoing>
+    </bpmn:startEvent>
+    
+    <bpmn:exclusiveGateway id="Gateway_ThreatCheck" name="Tactical Threat and Cover Assessment">
+      <bpmn:incoming>Flow_To_ThreatCheck</bpmn:incoming>
+      <bpmn:outgoing>Flow_ActiveThreat</bpmn:outgoing>
+      <bpmn:outgoing>Flow_CoverAvailable</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    
+    <bpmn:userTask id="UserTask_NeutralizeThreat" name="Neutralize Local Threat Vectors">
+      <bpmn:incoming>Flow_ActiveThreat</bpmn:incoming>
+      <bpmn:outgoing>Flow_To_Tourniquet</bpmn:outgoing>
+    </bpmn:userTask>
+    
+    <bpmn:userTask id="UserTask_ApplyTourniquet" name="Apply Tourniquet">
+      <bpmn:incoming>Flow_To_Tourniquet</bpmn:incoming>
+      <bpmn:outgoing>Flow_To_MoveCover</bpmn:outgoing>
+    </bpmn:userTask>
+    
+    <bpmn:userTask id="UserTask_MoveToCover" name="Move Casualty to Localized Cover">
+      <bpmn:incoming>Flow_To_MoveCover</bpmn:incoming>
+      <bpmn:outgoing>Flow_CoveredFromThreat</bpmn:outgoing>
+    </bpmn:userTask>
+    
+    <bpmn:exclusiveGateway id="Gateway_MergeCover" name="Reconverge Under Cover">
+      <bpmn:incoming>Flow_CoveredFromThreat</bpmn:incoming>
+      <bpmn:incoming>Flow_CoverAvailable</bpmn:incoming>
+      <bpmn:outgoing>Flow_To_Airway</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    
+    <bpmn:userTask id="UserTask_AirwayStabilize" name="Perform Primary Airway Stabilization">
+      <bpmn:incoming>Flow_To_Airway</bpmn:incoming>
+      <bpmn:outgoing>Flow_To_EvalMental</bpmn:outgoing>
+    </bpmn:userTask>
+    
+    <bpmn:userTask id="UserTask_EvalMentalStatus" name="Evaluate Mental Status and Neurological Responsiveness">
+      <bpmn:incoming>Flow_To_Airway</bpmn:incoming>
+      <bpmn:outgoing>Flow_To_LogCard</bpmn:outgoing>
+    </bpmn:userTask>
+    
+    <bpmn:userTask id="UserTask_LogTCCCard" name="Complete Standard Tactical Combat Casualty Care Card Records">
+      <bpmn:incoming>Flow_To_LogCard</bpmn:incoming>
+      <bpmn:outgoing>Flow_To_Handover</bpmn:outgoing>
+    </bpmn:userTask>
+    
+    <bpmn:userTask id="UserTask_HandoverExtraction" name="Execute Clinical and Data Handover to Extraction Team">
+      <bpmn:incoming>Flow_To_Handover</bpmn:incoming>
+      <bpmn:outgoing>Flow_To_End</bpmn:outgoing>
+    </bpmn:userTask>
+    
+    <bpmn:endEvent id="EndEvent_Stabilized" name="Casualty stabilized and prepared for handover">
+      <bpmn:incoming>Flow_To_End</bpmn:incoming>
+    </bpmn:endEvent>
+    
+    <bpmn:sequenceFlow id="Flow_To_ThreatCheck" sourceRef="StartEvent_POITrauma" targetRef="Gateway_ThreatCheck" />
+    <bpmn:sequenceFlow id="Flow_ActiveThreat" name="Active Threat Under Fire" sourceRef="Gateway_ThreatCheck" targetRef="UserTask_NeutralizeThreat" />
+    <bpmn:sequenceFlow id="Flow_To_Tourniquet" sourceRef="UserTask_NeutralizeThreat" targetRef="UserTask_ApplyTourniquet" />
+    <bpmn:sequenceFlow id="Flow_To_MoveCover" sourceRef="UserTask_ApplyTourniquet" targetRef="UserTask_MoveToCover" />
+    <bpmn:sequenceFlow id="Flow_CoveredFromThreat" sourceRef="UserTask_MoveToCover" targetRef="Gateway_MergeCover" />
+    <bpmn:sequenceFlow id="Flow_CoverAvailable" name="Localized Cover Available" sourceRef="Gateway_ThreatCheck" targetRef="Gateway_MergeCover" />
+    <bpmn:sequenceFlow id="Flow_To_Airway" sourceRef="Gateway_MergeCover" targetRef="UserTask_AirwayStabilize" />
+    <bpmn:sequenceFlow id="Flow_To_EvalMental" sourceRef="UserTask_AirwayStabilize" targetRef="UserTask_EvalMentalStatus" />
+    <bpmn:sequenceFlow id="Flow_To_LogCard" sourceRef="UserTask_EvalMentalStatus" targetRef="UserTask_LogTCCCard" />
+    <bpmn:sequenceFlow id="Flow_To_Handover" sourceRef="UserTask_LogTCCCard" targetRef="UserTask_HandoverExtraction" />
+    <bpmn:sequenceFlow id="Flow_To_End" sourceRef="UserTask_HandoverExtraction" targetRef="EndEvent_Stabilized" />
+  </bpmn:process>
+  
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1juweid">
+      <bpmndi:BPMNShape id="StartEvent_POITrauma_di" bpmnElement="StartEvent_POITrauma">
+        <dc:Bounds x="182" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="158" y="205" width="85" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Gateway_ThreatCheck_di" bpmnElement="Gateway_ThreatCheck" isMarkerVisible="true">
+        <dc:Bounds x="270" y="155" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="259" y="212" width="73" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="UserTask_NeutralizeThreat_di" bpmnElement="UserTask_NeutralizeThreat">
+        <dc:Bounds x="380" y="60" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="UserTask_ApplyTourniquet_di" bpmnElement="UserTask_ApplyTourniquet">
+        <dc:Bounds x="510" y="60" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="UserTask_MoveToCover_di" bpmnElement="UserTask_MoveToCover">
+        <dc:Bounds x="640" y="60" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Gateway_MergeCover_di" bpmnElement="Gateway_MergeCover" isMarkerVisible="true">
+        <dc:Bounds x="780" y="155" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="772" y="212" width="67" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="UserTask_AirwayStabilize_di" bpmnElement="UserTask_AirwayStabilize">
+        <dc:Bounds x="870" y="140" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="UserTask_EvalMentalStatus_di" bpmnElement="UserTask_EvalMentalStatus">
+        <dc:Bounds x="1010" y="140" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="UserTask_LogTCCCard_di" bpmnElement="UserTask_LogTCCCard">
+        <dc:Bounds x="1150" y="140" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="UserTask_HandoverExtraction_di" bpmnElement="UserTask_HandoverExtraction">
+        <dc:Bounds x="1290" y="140" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="EndEvent_Stabilized_di" bpmnElement="EndEvent_Stabilized">
+        <dc:Bounds x="1442" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1415" y="205" width="90" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNEdge id="Flow_To_ThreatCheck_di" bpmnElement="Flow_To_ThreatCheck">
+        <di:waypoint x="218" y="180" />
+        <di:waypoint x="270" y="180" />
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_ActiveThreat_di" bpmnElement="Flow_ActiveThreat">
+        <di:waypoint x="295" y="155" />
+        <di:waypoint x="295" y="100" />
+        <di:waypoint x="380" y="100" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="303" y="112" width="65" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_To_Tourniquet_di" bpmnElement="Flow_To_Tourniquet">
+        <di:waypoint x="480" y="100" />
+        <di:waypoint x="510" y="100" />
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_To_MoveCover_di" bpmnElement="Flow_To_MoveCover">
+        <di:waypoint x="610" y="100" />
+        <di:waypoint x="640" y="100" />
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_CoveredFromThreat_di" bpmnElement="Flow_CoveredFromThreat">
+        <di:waypoint x="740" y="100" />
+        <di:waypoint x="805" y="100" />
+        <di:waypoint x="805" y="155" />
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_CoverAvailable_di" bpmnElement="Flow_CoverAvailable">
+        <di:waypoint x="320" y="180" />
+        <di:waypoint x="780" y="180" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="330" y="162" width="79" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_To_Airway_di" bpmnElement="Flow_To_Airway">
+        <di:waypoint x="830" y="180" />
+        <di:waypoint x="870" y="180" />
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_To_EvalMental_di" bpmnElement="Flow_To_EvalMental">
+        <di:waypoint x="970" y="180" />
+        <di:waypoint x="1010" y="180" />
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_To_LogCard_di" bpmnElement="Flow_To_LogCard">
+        <di:waypoint x="1110" y="180" />
+        <di:waypoint x="1150" y="180" />
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_To_Handover_di" bpmnElement="Flow_To_Handover">
+        <di:waypoint x="1250" y="180" />
+        <di:waypoint x="1290" y="180" />
+      </bpmndi:BPMNEdge>
+      
+      <bpmndi:BPMNEdge id="Flow_To_End_di" bpmnElement="Flow_To_End">
+        <di:waypoint x="1390" y="180" />
+        <di:waypoint x="1442" y="180" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
