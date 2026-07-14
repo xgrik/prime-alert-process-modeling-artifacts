@@ -1,0 +1,293 @@
+The attached document is Joint Publication 4-02: Health Service Support (2006). The structured YAML record provided below contains selected target-process dossiers prepared from this document.
+
+Focus exclusively on target process P2, derived from candidate C4. Do not analyze, compare, or model the other selected processes in the YAML record.
+
+The selected-process dossier defines the intended process boundary, relevant actors, key decisions and handovers, and a focused source evidence package. Use this dossier as the primary scope definition. Consult the attached document only to verify or clarify the cited source fragments; do not repeat the full document exploration or extract unrelated content.
+
+Your task is to assess whether the selected process contains sufficient source-grounded procedural information to be represented as a focused BPMN process model.
+
+Assess whether the available evidence:
+
+- defines a clear initiating condition and end state;
+- describes a meaningful sequence of operational activities or coordination steps;
+- identifies relevant actors, roles, or potential BPMN lanes;
+- contains decisions, handovers, escalation points, or control-flow relations;
+- provides sufficient source support for the defined process boundary.
+
+Do not generate BPMN elements, BPMN XML, implementation recommendations, or PRIME Alert technical components at this stage.
+
+Return only the following output:
+
+Scope Confirmation
+
+Confirm the selected target process, its boundary, and its main operational purpose.
+
+Evidence Assessment
+
+Summarize the source-supported procedural information relevant to BPMN modeling.
+
+Modeling Readiness
+
+Assign one status: Ready, Requires narrowing, or Insufficient evidence.
+
+Modeling Constraints and Gaps
+
+List only source-related ambiguities, missing details, or boundary risks that must be respected in subsequent BPMN modeling.
+
+Here is the structured YAML record with process summary:
+
+target_process_selection:
+  selection_summary:
+    rationale: Selected a complementary matrix of tactical point-of-injury care, en-route communications, and force health tracking to cover all monitoring, alerting, and extraction domains.
+    selected_process_count: 3
+    complementary_operational_areas:
+      - Frontline Point-of-Injury Care
+      - Tactical Evacuation Coordination
+      - Force Health Hazard Tracking
+
+  selected_processes:
+    - id: P1
+      candidate_id: C1
+      name: Tactical Point-of-Injury Trauma Stabilization
+      parent_domain: D2
+      related_domains: [D4, D6]
+      related_findings: [E1, E13]
+      prioritization_result:
+        overall_priority: High
+        key_selection_factors:
+          - Direct dependency on real-time battlefield physiological status telemetry streams.
+          - Highly specified, sequential frontline treatment milestones in doctrine.
+      selection_rationale: Immediate point-of-injury treatment is the core operational layer where real-time physiological alerts directly change clinical outcomes and mitigate preventable mortality.
+
+      process_charter:
+        purpose: Stabilize life-threatening battlefield injuries at the point of tactical incident using first responder care protocols.
+        process_boundary:
+          start_condition: A responder or soldier sustains an acute physical injury or health threat in the operational field.
+          end_state: The patient is clinically stabilized, documented, and prepared for evacuation handover.
+        included_scope:
+          - Immediate care under fire threat suppression and movement to cover.
+          - Application of primary life-saving interventions including hemorrhage and airway control.
+          - Tactical field care documentation using standardized casualty cards.
+        excluded_scope:
+          - Advanced surgical operations or facility-based clinical admission procedures.
+          - Coordination of long-range transport fleet assets or flight path routing.
+        main_actors:
+          - Combat Medic or First Responder
+          - Buddy Aid Provider
+          - Casualty (Patient)
+        potential_bpmn_lanes:
+          - First Responder / Combat Medic
+          - Patient / Casualty
+        core_process_logic:
+          - Perform care under fire steps to neutralize local threat vectors.
+          - Apply tourniquets and primary airway stabilization under cover.
+          - Evaluate mental status and verify neurological responsiveness levels.
+          - Complete standard tactical combat casualty care card records for transport.
+        key_decisions_or_handovers:
+          - Decision whether to treat in place under active threat versus moving to localized cover.
+          - Direct clinical handover of completed casualty metrics to incoming extraction teams.
+        expected_outcome: Casualty is structurally stabilized against immediate threats to life and prepped for tactical evacuation.
+
+      source_evidence_package:
+        core_fragments:
+          - id: P1-S1
+            reference: "[JP 4-02, Chapter I, Section 7, p. I-4]"
+            pdf_page: "not reliably determined"
+            heading: "First Responder Capability"
+            evidence_status: Explicit
+            supports:
+              - boundary
+              - actor
+              - activity
+              - outcome
+            evidence_summary: Defines first responder capability as the immediate care provided to save lives, prevent complications, and stabilize casualties for movement.
+        supporting_fragments:
+          - id: P1-S2
+            reference: "[JP 4-02, Appendix F, Section 2, p. F-1]"
+            pdf_page: "not reliably determined"
+            heading: "Casualty Prevention and Field Care"
+            evidence_status: Partial
+            supports:
+              - activity
+              - decision
+            evidence_summary: Establishes individual and buddy-care operational requirements for reducing battlefield injuries and executing immediate triage loops.
+
+      prime_alert_support_points:
+        inference_status: Inferred
+        potential_support_areas:
+          - monitoring
+          - alerting
+          - decision support
+        rationale: Automatically matches real-time bio-telemetry to trigger critical field care protocols and automated treatment compliance tracking.
+
+      modeling_readiness:
+        status: Ready
+        notes:
+          - Process logic is highly sequential and bounded well by established tactical combat casualty care standards.
+
+    - id: P2
+      candidate_id: C4
+      name: Tactical 9-Line MEDEVAC Request Execution
+      parent_domain: D4
+      related_domains: [D2, D3]
+      related_findings: [E1]
+      prioritization_result:
+        overall_priority: High
+        key_selection_factors:
+          - Rigidly structured message format enabling text parsing automation.
+          - High coordination complexity across radio and network systems.
+      selection_rationale: This process forms the definitive operational bridge between frontline stabilization and tactical evacuation networks, directly utilizing communication and extraction assets.
+
+      process_charter:
+        purpose: Standardize and transmit tactical casualty parameters to coordinate urgent medical air or ground evacuation assets.
+        process_boundary:
+          start_condition: A field medical responder determines that a patient requires evacuation to a higher capability facility.
+          end_state: The MEDEVAC request is validated, accepted, and an evacuation asset is dispatched.
+        included_scope:
+          - Compiling lines 1 through 9 of the standardized wartime medical evacuation format.
+          - Radio transmission protocols and verification handshakes.
+          - Incident command prioritization based on patient classification.
+        excluded_scope:
+          - Physical piloting or driving of the evacuation vehicles.
+          - Strategic inter-theater patient movement registry updates.
+        main_actors:
+          - Field Medical Responder
+          - Unit Communications Operator
+          - Evacuation Control Center Dispatcher
+        potential_bpmn_lanes:
+          - Field Medical Unit
+          - Evacuation Coordinating Cell
+          - Dispatch Dispatcher
+        core_process_logic:
+          - Collate grid location, radio frequency, call sign, and patient counts.
+          - Categorize patient injury severity into urgent, priority, or routine precedence.
+          - Verify specialized equipment requirements and tactical terrain hazards.
+          - Transmit structured 9-Line payload over secure combat radio channels.
+        key_decisions_or_handovers:
+          - Decision to assign Urgent versus Priority precedence based on vital status.
+          - Communication handover between tactical unit and regional dispatcher.
+        expected_outcome: Accurate MEDEVAC request is received and logged, leading to immediate evacuation vehicle dispatch.
+
+      source_evidence_package:
+        core_fragments:
+          - id: P2-S1
+            reference: "[JP 4-02, Appendix B, Section d, p. B-18]"
+            pdf_page: "not reliably determined"
+            heading: "Medical Evacuation Request Formats and Procedures"
+            evidence_status: Explicit
+            supports:
+              - boundary
+              - activity
+              - decision
+              - handover
+            evidence_summary: Details the precise structure of the wartime MEDEVAC request format, distinguishing between lines 1-5 and lines 6-9 for launch windows.
+        supporting_fragments:
+          - id: P2-S2
+            reference: "[JP 4-02, Appendix B, Section a, p. B-17]"
+            pdf_page: "not reliably determined"
+            heading: "Patient Evacuation Precedence Categories"
+            evidence_status: Explicit
+            supports:
+              - decision
+              - activity
+            evidence_summary: Formally defines Priority I (Urgent), Priority IA (Urgent-Surgical), Priority II (Priority), and Priority III (Routine) criteria.
+
+      prime_alert_support_points:
+        inference_status: Inferred
+        potential_support_areas:
+          - field communication
+          - command-unit coordination
+          - regrouping or extraction support
+        rationale: Automatically parses vital sensor trends into standard 9-Line data strings, cutting down radio transmission latency during extraction windows.
+
+      modeling_readiness:
+        status: Ready
+        notes:
+          - Highly modelable due to explicit line-by-line format fields and well-defined communication roles.
+
+    - id: P3
+      candidate_id: C8
+      name: Disease and Non-Battle Injury Health Hazard Tracking
+      parent_domain: D6
+      related_domains: [D1, D2]
+      related_findings: [E9, E11]
+      prioritization_result:
+        overall_priority: High
+        key_selection_factors:
+          - Strong correlation with regional toxin and meteorological micro-environmental sensors.
+          - High potential for algorithmic trend alerting across force populations.
+      selection_rationale: Focuses on defensive environmental and physiological tracking, ensuring complete representation of the system's force health protection functions.
+
+      process_charter:
+        purpose: Monitor, capture, and report environmental and non-battle illness trends to preserve unit combat readiness.
+        process_boundary:
+          start_condition: Daily environmental risk indices or individual non-battle injury logs are registered at the unit level.
+          end_state: Aggregated health threat reports are sent to the joint force surgeon to adjust protective postures.
+        included_scope:
+          - Documenting localized environmental toxins, weather spikes, and epidemiological data.
+          - Submitting periodic force status logs into the medical command registry.
+          - Initiating protective action warnings based on hazard benchmarks.
+        excluded_scope:
+          - Individual point-of-injury triage or trauma surgical procedures.
+          - Tactical vehicle dispatch or evacuation coordination.
+        main_actors:
+          - Preventive Medicine Officer
+          - Unit Health Clerk
+          - Joint Force Surgeon Staff
+        potential_bpmn_lanes:
+          - Local Unit Health Representative
+          - Preventive Medicine Cell
+          - Joint Task Force Surgeon
+        core_process_logic:
+          - Collect environmental hazard metrics and non-battle illness cases daily.
+          - Synthesize incident case volumes against total active unit manpower baselines.
+          - Identify abnormal clusters of toxins, heat strain, or disease vector incidents.
+          - Draft and transmit formal force health threat recommendations to command cells.
+        key_decisions_or_handovers:
+          - Decision whether a disease threshold has been crossed to warrant a warning.
+          - Escalation handover of health threat reports to higher headquarter commanders.
+        expected_outcome: Updated operational posture and protective steps implemented to prevent force degradation.
+
+      source_evidence_package:
+        core_fragments:
+          - id: P3-S1
+            reference: "[JP 4-02, Chapter I, Section 5, p. I-3]"
+            pdf_page: "not reliably determined"
+            heading: "Prevention and Protection Capability"
+            evidence_status: Explicit
+            supports:
+              - boundary
+              - activity
+              - outcome
+            evidence_summary: Outlines the force health protection mandate to anticipate, identify, evaluate, and control health hazards from environmental and disease vectors.
+        supporting_fragments:
+          - id: P3-S2
+            reference: "[JP 4-02, Appendix F, Section 8, p. F-9]"
+            pdf_page: "not reliably determined"
+            heading: "Make Control Decisions and Implement Risk Controls"
+            evidence_status: Explicit
+            supports:
+              - decision
+              - activity
+            evidence_summary: Establishes the six-step operational risk assessment framework used to implement protective strategies against regional health hazards.
+
+      prime_alert_support_points:
+        inference_status: Inferred
+        potential_support_areas:
+          - monitoring
+          - alerting
+          - decision support
+        rationale: Aggregates micro-environmental sensors with physiological cohort baselines to flag toxic plumes or thermal spikes before clinical injury manifests.
+
+      modeling_readiness:
+        status: Ready
+        notes:
+          - Requires explicit gating loops to distinguish daily recurring battle rhythms from emergency hazard alert escalation triggers.
+
+  unselected_high_priority_candidates:
+    - candidate_id: C2
+      name: Frontline Mass Casualty Triage Allocation
+      reason_not_selected: Omitted to prioritize C1, which covers highly complementary individual point-of-injury care logic rather than overlapping with mass cohort logistics.
+    - candidate_id: C3
+      name: Boundary-Level CBRN Decontamination and Intake
+      reason_not_selected: Bounded by specific physical site facility layouts that do not align as directly with mobile field tracking features as C8 does.
