@@ -1,0 +1,200 @@
+prioritization:
+  criteria:
+    - prime_alert_relevance
+    - operational_and_health_impact
+    - decision_criticality
+    - coordination_complexity
+    - digitalization_potential
+    - source_evidence_availability
+    - detailed_modeling_feasibility
+  candidates:
+    - id: C1
+      name: Tactical Point-of-Injury Trauma Stabilization
+      parent_domain: D2
+      related_findings: [E1, E13]
+      assessment:
+        prime_alert_relevance: High
+        operational_and_health_impact: High
+        decision_criticality: High
+        coordination_complexity: Medium
+        digitalization_potential: High
+        source_evidence_availability: High
+        detailed_modeling_feasibility: High
+      overall_priority: High
+      strengths:
+        - Direct functional mapping to real-time bio-telemetry streams.
+        - Exceptionally clear TCCC process milestones in underlying doctrine.
+      limitations_or_risks:
+        - High environmental volatility can degrade tactical sensor reliability.
+      rationale: Immediate point-of-injury triage and life-saving loops directly leverage physiological sensor streams and real-time field alerting profiles.
+    - id: C2
+      name: Frontline Mass Casualty Triage Allocation
+      parent_domain: D2
+      related_findings: [E7]
+      assessment:
+        prime_alert_relevance: High
+        operational_and_health_impact: High
+        decision_criticality: High
+        coordination_complexity: High
+        digitalization_potential: High
+        source_evidence_availability: High
+        detailed_modeling_feasibility: High
+      overall_priority: High
+      strengths:
+        - Highly structured categorization logic (IDME) facilitates clear modeling.
+        - High value for dashboard-driven cohort monitoring support models.
+      limitations_or_risks:
+        - Resource-rationing choices depend heavily on human command overrides.
+      rationale: Influx spikes require immediate automated alerting and multi-patient physiological status aggregation to guide critical medical asset distributions.
+    - id: C3
+      name: Boundary-Level CBRN Decontamination and Intake
+      parent_domain: D2
+      related_findings: [E8]
+      assessment:
+        prime_alert_relevance: High
+        operational_and_health_impact: High
+        decision_criticality: High
+        coordination_complexity: Medium
+        digitalization_potential: High
+        source_evidence_availability: High
+        detailed_modeling_feasibility: High
+      overall_priority: High
+      strengths:
+        - Highly explicit gatekeeper tracking thresholds and physical check-points.
+        - Ideal match for micro-environmental hazard monitoring inputs.
+      limitations_or_risks:
+        - Complex interactions between physical washing cycles and medical treatment tracks.
+      rationale: Integrates environmental toxin metrics with localized border triage to isolate facilities from secondary contamination vectors.
+    - id: C4
+      name: Tactical 9-Line MEDEVAC Request Execution
+      parent_domain: D4
+      related_findings: [E1]
+      assessment:
+        prime_alert_relevance: High
+        operational_and_health_impact: High
+        decision_criticality: High
+        coordination_complexity: High
+        digitalization_potential: High
+        source_evidence_availability: High
+        detailed_modeling_feasibility: High
+      overall_priority: High
+      strengths:
+        - Standardized structure provides clear logical gates for automation.
+        - Strong reliance on time-critical coordination loops.
+      limitations_or_risks:
+        - Inter-service radio protocol differences introduce formatting friction.
+      rationale: Automated parsing of location data and physiological trends into standard 9-Line logs streamlines extraction times and enhances field communications.
+    - id: C5
+      name: Inter-Theater Patient Movement Request Validation
+      parent_domain: D4
+      related_findings: [E2, E16]
+      assessment:
+        prime_alert_relevance: Medium
+        operational_and_health_impact: Medium
+        decision_criticality: Medium
+        coordination_complexity: High
+        digitalization_potential: High
+        source_evidence_availability: High
+        detailed_modeling_feasibility: High
+      overall_priority: Medium
+      strengths:
+        - Explicitly structured validation steps across joint registries.
+        - Standardized flight manifest requirements facilitate logic mapping.
+      limitations_or_risks:
+        - Relies on back-office database actions detached from active frontline hazards.
+      rationale: Provides administrative coordination value but lacks direct operational ties to micro-environmental sensor tracking or field extraction actions.
+    - id: C6
+      name: Unregulated Tactical Casualty Reception and Logging
+      parent_domain: D3
+      related_findings: [E18]
+      assessment:
+        prime_alert_relevance: Medium
+        operational_and_health_impact: Medium
+        decision_criticality: Medium
+        coordination_complexity: Medium
+        digitalization_potential: Medium
+        source_evidence_availability: Medium
+        detailed_modeling_feasibility: Medium
+      overall_priority: Medium
+      strengths:
+        - Identifies clear tracking vulnerabilities within facility border environments.
+        - Alignment with proximity identity tracking features.
+      limitations_or_risks:
+        - Doctrine lacks detailed steps for non-medical arrival configurations.
+      rationale: Proximity scanning tools can capture unannounced arrivals, but partial source evidence limits rigorous process boundary definitions.
+    - id: C7
+      name: Daily Joint Medical Operations Center Capacity Tracking
+      parent_domain: D1
+      related_findings: [E4]
+      assessment:
+        prime_alert_relevance: Medium
+        operational_and_health_impact: High
+        decision_criticality: Medium
+        coordination_complexity: High
+        digitalization_potential: High
+        source_evidence_availability: High
+        detailed_modeling_feasibility: High
+      overall_priority: Medium
+      strengths:
+        - Clear reporting cycles embedded in standard task force battle rhythms.
+        - High potential to automate spreadsheet data collection.
+      limitations_or_risks:
+        - Focuses on aggregated theater metrics rather than real-time field monitoring.
+      rationale: Automates macro tracking and command dashboards, but operates outside the high-risk tactical field communication loop.
+    - id: C8
+      name: Disease and Non-Battle Injury Health Hazard Tracking
+      parent_domain: D6
+      related_findings: [E9, E11]
+      assessment:
+        prime_alert_relevance: High
+        operational_and_health_impact: High
+        decision_criticality: High
+        coordination_complexity: Medium
+        digitalization_potential: High
+        source_evidence_availability: High
+        detailed_modeling_feasibility: High
+      overall_priority: High
+      strengths:
+        - Clear data loops linking field environmental observations to joint plans.
+        - Strong correlation with regional toxin and weather sensor networks.
+      limitations_or_risks:
+        - Distinguishing localized clinical spikes from baseline trends requires advanced modeling.
+      rationale: Directly leverages aggregated environmental and physiological datasets to trigger health threat alerts and direct force protection steps.
+    - id: C9
+      name: Theater Blood Supply Matrix Reporting
+      parent_domain: D5
+      related_findings: [E5]
+      assessment:
+        prime_alert_relevance: Low
+        operational_and_health_impact: Medium
+        decision_criticality: Medium
+        coordination_complexity: Medium
+        digitalization_potential: High
+        source_evidence_availability: High
+        detailed_modeling_feasibility: High
+      overall_priority: Low
+      strengths:
+        - Highly explicit inventory ledger and distribution logic.
+        - Clear cold-chain parameters available for asset data links.
+      limitations_or_risks:
+        - Detached from field communications, extraction tracking, or tactical alerts.
+      rationale: Highly modelable logistics cycle that offers little intersection with real-time field health tracking or command coordination profiles.
+    - id: C10
+      name: Patient Movement Item Tracking and Maintenance Swap
+      parent_domain: D5
+      related_findings: [E6]
+      assessment:
+        prime_alert_relevance: Low
+        operational_and_health_impact: Medium
+        decision_criticality: Low
+        coordination_complexity: Medium
+        digitalization_potential: Medium
+        source_evidence_availability: Medium
+        detailed_modeling_feasibility: Medium
+      overall_priority: Low
+      strengths:
+        - Addresses critical equipment visibility issues across theater networks.
+        - Clear alignment with basic digital component tracking tagging.
+      limitations_or_risks:
+        - Process models are heavily warped by informal field workarounds.
+      rationale: Focuses on specialized hardware lifecycle tracking, offering minimal relevance to physiological telemetry or tactical responder safety.

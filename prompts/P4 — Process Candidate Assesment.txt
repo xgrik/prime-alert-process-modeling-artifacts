@@ -1,0 +1,146 @@
+P4 — Process Candidate Prioritization
+
+Role
+
+You are an analyst of military health operations, digital health-support systems, and business process modeling.
+
+Using the preceding P3 candidate inventory, prioritize the identified military health process candidates according to their potential value for the PRIME Alert case study.
+
+Input
+
+Use the preceding P3 structured candidate record as the primary input for this task.
+
+Retain all candidate identifiers C1, C2, C3, and so on, as well as their names, parent domains, related findings, and source references.
+
+Consult the preceding P1 exploration record, P2 landscape record, or Joint Publication 4-02: Health Service Support only when clarification of a candidate or source reference is necessary.
+
+If the P3 candidate record is not available in the current conversation, ask for it before proceeding.
+
+PRIME Alert System Context
+
+PRIME Alert is a planned AI-assisted health-monitoring and command-support solution for first responders and soldiers operating in high-risk natural-disaster and combat environments. The system is intended to combine physiological data, including SpO2, heart rate, and respiratory rate, with micro-environmental data such as air quality, toxins, and temperature, as well as global environmental data from sources such as weather stations and radar systems.
+
+Its intended functions include real-time health and environmental risk monitoring, stress-level assessment, alert generation, automated speech-based communication, and support for health-related decisions in the field. PRIME Alert is also expected to support communication between responders or soldiers and a centralized Command Unit, including operational actions such as regrouping or extraction.
+
+This description is used only as a relevance context for prioritization. It must not be treated as evidence of process logic; process activities, roles, decisions, and handovers must remain grounded in the doctrinal source material.
+
+Evidence and Scope Rules
+
+- Treat the P3 candidate inventory and its linked doctrinal evidence as the basis for assessing process logic and source support.
+- Treat potential PRIME Alert support only as an inferred relevance assessment.
+- Do not present inferred PRIME Alert support points as doctrinal facts.
+- Preserve all existing C, D, and E identifiers consistently.
+- Do not rename, merge, remove, or create candidates in this step.
+- Do not introduce activities, actors, decisions, handovers, or outcomes that are not supported by the candidate record or doctrinal source material.
+- Clearly distinguish strong source support from partial or ambiguous evidence.
+- Do not recommend final target processes at this stage.
+- Do not create BPMN elements, BPMN XML, implementation designs, or technical architecture proposals.
+- Clearly mark uncertainty rather than filling gaps with assumptions.
+
+Prioritization Criteria
+
+Assess each candidate using the following qualitative criteria:
+
+- PRIME Alert Relevance
+
+  The potential relevance of the process to PRIME Alert functions such as health or environmental monitoring, alerting, decision support, field communication, Command Unit coordination, regrouping, or extraction.
+
+- Operational and Health Impact
+
+  The potential effect of the process on responder or soldier safety, health protection, casualty management, operational continuity, or mission support.
+
+- Decision Criticality
+
+  The importance of decisions, escalation points, or time-sensitive choices within the process.
+
+- Coordination Complexity
+
+  The extent of coordination, handovers, communication, or dependencies among actors, units, medical facilities, or command structures.
+
+- Digitalization Potential
+
+  The potential for meaningful digital support without assuming that PRIME Alert replaces operational or clinical decision-makers.
+
+- Source Evidence Availability
+
+  The degree to which the doctrinal material provides sufficient and explicit evidence for the process logic.
+
+- Detailed Modeling Feasibility
+
+  The feasibility of defining clear process boundaries and generating a focused BPMN model from the available source material.
+
+Use only the following levels for each criterion:
+
+- High
+- Medium
+- Low
+
+Assign an overall priority tier of High, Medium, or Low based on the combined assessment. Do not calculate or invent numerical scores.
+
+Task
+
+Prioritize every process candidate from the P3 inventory.
+
+For each candidate:
+
+- assess all seven prioritization criteria;
+- assign an overall priority tier;
+- provide a concise rationale grounded in the candidate record and PRIME Alert context;
+- identify key strengths;
+- identify major limitations, ambiguity, or risks affecting its suitability for detailed BPMN modeling.
+
+The output should support a later target-process selection step, but must not itself select or recommend final target processes.
+
+Output Format
+
+Return only the following two outputs.
+
+1. Structured Prioritization Record
+
+Create a concise YAML record for use in the subsequent target-process selection step.
+
+Use the following structure:
+
+prioritization:
+  criteria:
+    - prime_alert_relevance
+    - operational_and_health_impact
+    - decision_criticality
+    - coordination_complexity
+    - digitalization_potential
+    - source_evidence_availability
+    - detailed_modeling_feasibility
+  candidates:
+    - id: C1
+      name: candidate name
+      parent_domain: D1
+      related_findings: [E1, E4]
+      assessment:
+        prime_alert_relevance: High | Medium | Low
+        operational_and_health_impact: High | Medium | Low
+        decision_criticality: High | Medium | Low
+        coordination_complexity: High | Medium | Low
+        digitalization_potential: High | Medium | Low
+        source_evidence_availability: High | Medium | Low
+        detailed_modeling_feasibility: High | Medium | Low
+      overall_priority: High | Medium | Low
+      strengths:
+        - concise strength
+      limitations_or_risks:
+        - concise limitation, ambiguity, or risk
+      rationale: concise source-grounded prioritization rationale
+
+Keep all values concise and preserve all identifiers consistently.
+
+2. Compact Prioritization Table
+
+Provide one concise Markdown table suitable for later adaptation into an academic paper.
+
+Use the following columns:
+
+| Candidate | PRIME Alert relevance and digitalization potential | Operational and health impact | Decision and coordination value | Source support | Modeling feasibility | Overall priority |
+|---|---|---|---|---|---|---|
+
+Use only High, Medium, or Low in the table cells.
+
+Do not include Mermaid code, numerical scores, target-process recommendations, BPMN elements, BPMN XML, implementation recommendations, or technical architecture proposals.

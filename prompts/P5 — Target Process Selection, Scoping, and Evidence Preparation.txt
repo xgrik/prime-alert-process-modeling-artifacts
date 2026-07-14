@@ -1,0 +1,147 @@
+P5 — Target Process Selection, Scoping, and Evidence Preparation
+
+Role
+
+You are an analyst of military health operations and business process modeling.
+
+Using the preceding process candidate inventory and prioritization record, select target processes for detailed BPMN modeling and prepare source-grounded modeling inputs.
+
+Input
+
+Use the preceding P3 structured candidate record and P4 prioritization record as the primary inputs for this task.
+
+Retain all existing identifiers E, D, and C consistently. Consult the preceding P1 exploration record, P2 landscape record, or Joint Publication 4-02: Health Service Support only when clarification of source evidence, process scope, or page references is necessary.
+
+If the P3 or P4 record is not available in the current conversation, ask for it before proceeding.
+
+PRIME Alert System Context
+
+PRIME Alert is a planned AI-assisted health-monitoring and command-support solution for first responders and soldiers operating in high-risk natural-disaster and combat environments. The system is intended to combine physiological data, including SpO2, heart rate, and respiratory rate, with micro-environmental data such as air quality, toxins, and temperature, as well as global environmental data from sources such as weather stations and radar systems.
+
+Its intended functions include real-time health and environmental risk monitoring, stress-level assessment, alert generation, automated speech-based communication, and support for health-related decisions in the field. PRIME Alert is also expected to support communication between responders or soldiers and a centralized Command Unit, including operational actions such as regrouping or extraction.
+
+This description is used only as a relevance context for selecting processes that may be supported by the future solution. It must not be treated as evidence of process logic; process activities, roles, decisions, and handovers must remain grounded in the doctrinal source material.
+
+Evidence and Scope Rules
+
+- Treat the P3 candidate inventory, P4 prioritization record, and linked doctrinal evidence as the basis for selection and process scoping.
+- Use PRIME Alert relevance only as an inferred selection factor. Do not present inferred support points as doctrinal facts.
+- Select exactly three target processes, unless fewer than three candidates have sufficiently clear boundaries and source evidence. In that case, select only the modeling-ready processes and explain the limitation.
+- Prefer candidates with high overall priority, clear operational boundaries, sufficient source support, and feasible scope for detailed BPMN modeling.
+- Select complementary processes from different operational areas where possible. Avoid selecting near-duplicate processes.
+- Assign stable identifiers P1, P2, and P3 to the selected target processes.
+- Do not invent activities, actors, decisions, handovers, outcomes, or source references.
+- Clearly distinguish explicit evidence from partial evidence.
+- Use the following source-reference format whenever possible: [JP 4-02, Chapter X, Section Y, p. Z].
+- Include PDF page numbers in addition to printed page numbers when they can be determined reliably.
+- Do not create BPMN elements, BPMN XML, detailed implementation designs, or technical architecture proposals in this step.
+- Clearly mark uncertainty or insufficient evidence rather than filling gaps with assumptions.
+
+Task
+
+Select three target processes for detailed BPMN modeling.
+
+For each selected process, prepare a modeling-ready process charter and a focused source evidence package. The evidence package must identify the exact doctrinal sections, headings, and page ranges needed for subsequent BPMN generation. Select only the most relevant source fragments; do not provide broad document chapters without explaining their specific relevance.
+
+Each selected process must include:
+
+- selected candidate and parent domain;
+- selection rationale;
+- operational purpose;
+- clear process boundary, including start condition and end state;
+- included and excluded scope;
+- main actors and potential BPMN lane candidates;
+- source-grounded core process logic;
+- key decisions, handovers, coordination points, and escalation paths;
+- expected outcome;
+- focused evidence package with exact source references;
+- inferred PRIME Alert support points, clearly marked as inferences;
+- modeling-readiness assessment.
+
+Output Format
+
+Return only one structured YAML record using the following structure:
+
+target_process_selection:
+  selection_summary:
+    rationale: concise explanation of the overall selection approach
+    selected_process_count: 3
+    complementary_operational_areas:
+      - concise operational area
+
+  selected_processes:
+    - id: P1
+      candidate_id: C1
+      name: concise process name
+      parent_domain: D1
+      related_domains: [D2]
+      related_findings: [E1, E4]
+      prioritization_result:
+        overall_priority: High | Medium | Low
+        key_selection_factors:
+          - concise factor
+      selection_rationale: concise explanation
+
+      process_charter:
+        purpose: concise operational purpose
+        process_boundary:
+          start_condition: concise source-grounded initiating condition
+          end_state: concise source-grounded completion state
+          included_scope:
+            - concise included element
+          excluded_scope:
+            - concise excluded element
+        main_actors:
+          - actor or role
+        potential_bpmn_lanes:
+          - lane name
+        core_process_logic:
+          - concise source-grounded process step or coordination mechanism
+        key_decisions_or_handovers:
+          - concise source-grounded decision, handover, or escalation point
+        expected_outcome: concise source-grounded outcome
+
+      source_evidence_package:
+        core_fragments:
+          - id: P1-S1
+            reference: "[JP 4-02, Chapter X, Section Y, p. Z]"
+            pdf_page: PDF page number or "not reliably determined"
+            heading: exact or concise section heading
+            evidence_status: Explicit | Partial
+            supports:
+              - boundary | actor | activity | decision | handover | outcome
+            evidence_summary: concise source-grounded summary
+        supporting_fragments:
+          - id: P1-S2
+            reference: "[JP 4-02, Chapter X, Section Y, p. Z]"
+            pdf_page: PDF page number or "not reliably determined"
+            heading: exact or concise section heading
+            evidence_status: Explicit | Partial
+            supports:
+              - boundary | actor | activity | decision | handover | outcome
+            evidence_summary: concise source-grounded summary
+
+      prime_alert_support_points:
+        inference_status: Inferred
+        potential_support_areas:
+          - monitoring
+          - alerting
+          - decision support
+          - command-unit coordination
+          - field communication
+          - regrouping or extraction support
+        rationale: concise explanation
+
+      modeling_readiness:
+        status: Ready | Requires narrowing | Insufficient evidence
+        notes:
+          - concise modeling note or limitation
+
+  unselected_high_priority_candidates:
+    - candidate_id: C2
+      name: candidate name
+      reason_not_selected: concise reason
+
+Keep all values concise and preserve identifiers consistently for subsequent BPMN-generation prompts.
+
+Do not provide Mermaid code, Markdown tables, BPMN elements, BPMN XML, implementation recommendations, or technical architecture proposals.
